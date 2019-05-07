@@ -1,0 +1,34 @@
+<?php 
+      if($query){
+         echo 'Pagination.init($(".ht-page"), pageChange);';
+
+        echo 'Pagination.Page($(".ht-page"), page-1, totalPage, pageSize);';
+      }
+    ?>
+
+    <script type="text/javascript">
+    var totalPage = <?php echo $total_page ?>;
+    var pageSize = <?php echo $page_size ?>;
+    var page = <?php echo $page ?>;
+    <?php 
+      if(!$search){
+        echo 'var search = "";';
+      }else{
+        echo 'var search = "'.$search.'";';
+      }
+    ?>
+    function pageChange(i) {
+            //alert("index is :" + i);
+            //location.href = '/admin/newslist.php?'+search+'page='+(i+1);
+            location.href = '/admin/newslist.php?'+search+'page='+(i+1);
+            Pagination.Page($(".ht-page"), i, totalPage, pageSize);
+            //Pagination.Page($(".ht-page"), i, 10000, 10);
+    }
+
+    
+    if(parseInt(totalPage)>0){
+      Pagination.init($(".ht-page"), pageChange);
+      Pagination.Page($(".ht-page"), page-1, totalPage, pageSize);
+    }
+    //Pagination.Page($(".ht-page"), 3, 10000, 10);
+  </script>
